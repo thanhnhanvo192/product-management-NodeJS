@@ -1,8 +1,9 @@
 const express = require("express"); // Import thư viện Express
 const routes = require("./routes/clients/index.route"); // Import các route cho client
+require("dotenv").config(); // Load biến môi trường từ file .env
 
 const app = express(); // Tạo ứng dụng Express
-const port = 3000;
+const port = process.env.PORT;
 
 app.set("views", "./views"); // Khai báo thư mục chứa các file giao diện
 app.set("view engine", "pug"); // Thiết lập Pug làm template engine
