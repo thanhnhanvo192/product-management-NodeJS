@@ -11,6 +11,9 @@ app.set("view engine", "pug"); // Thiết lập Pug làm template engine
 // Routes
 routes(app);
 
+app.use(express.static("public")); // Thiết lập thư mục chứa file tĩnh
+
+// Start server
 app.listen(port, () => {
   console.log(`App is listening on ${port}`);
 });
