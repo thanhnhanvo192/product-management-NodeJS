@@ -2,6 +2,9 @@ const express = require("express"); // Import thư viện Express
 const routes = require("./routes/clients/index.route"); // Import các route cho client
 require("dotenv").config(); // Load biến môi trường từ file .env
 
+const database = require("./configs/database");
+database.connect();
+
 const app = express(); // Tạo ứng dụng Express
 const port = process.env.PORT;
 

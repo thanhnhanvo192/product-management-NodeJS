@@ -68,6 +68,23 @@
 .product-item .inner-content {
   padding: 15px;
 }
-.product-item .inner-content {
+.product-item .inner-content .inner-price-new {
+  color: green;
+  font-weight: 600;
+  font-size: 18px;
+}
+.product-item .inner-content .inner-price-old {
+  color: red;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: line-through;
+}
+.product-item .inner-content .inner-discount {
+  background: red;
+  border-radius: 10px;
+  color: #fff;
+  width: 60px;
+  padding: 1px 10px;
+  text-align: center;
 }
 /* End product item */
