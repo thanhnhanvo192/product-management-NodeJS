@@ -1,6 +1,8 @@
 const express = require("express"); // Import thư viện Express
-const routes = require("./routes/clients/index.route"); // Import các route cho client
 require("dotenv").config(); // Load biến môi trường từ file .env
+
+const routesAdmin = require("./routes/admin/index.route"); // Import các route cho admin
+const routes = require("./routes/clients/index.route"); // Import các route cho client
 
 const database = require("./configs/database");
 database.connect();
@@ -12,6 +14,7 @@ app.set("views", "./views"); // Khai báo thư mục chứa các file giao diệ
 app.set("view engine", "pug"); // Thiết lập Pug làm template engine
 
 // Routes
+routesAdmin(app);
 routes(app);
 
 app.use(express.static("public")); // Thiết lập thư mục chứa file tĩnh
