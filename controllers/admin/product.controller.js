@@ -1,5 +1,13 @@
-module.exports.product = (req, res) => {
+const Product = require("../../models/product.model");
+
+// [GET] /admin/products
+module.exports.product = async (req, res) => {
+  const products = await Product.find({
+    deleted: false,
+  });
+  console.log(products);
   res.render("admin/pages/products/index", {
     pageTitle: "Trang sản phẩm",
+    products: products,
   });
 };
