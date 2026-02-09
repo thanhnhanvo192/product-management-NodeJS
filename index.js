@@ -3,8 +3,10 @@ require("dotenv").config(); // Load biến môi trường từ file .env
 
 const routesAdmin = require("./routes/admin/index.route"); // Import các route cho admin
 const routes = require("./routes/clients/index.route"); // Import các route cho client
+const systemConfig = require("./configs/system");
 
 const database = require("./configs/database");
+const system = require("./configs/system");
 database.connect();
 
 const app = express(); // Tạo ứng dụng Express
@@ -12,6 +14,9 @@ const port = process.env.PORT;
 
 app.set("views", "./views"); // Khai báo thư mục chứa các file giao diện
 app.set("view engine", "pug"); // Thiết lập Pug làm template engine
+
+// App local variables
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 // Routes
 routesAdmin(app);
