@@ -20,12 +20,30 @@ module.exports.product = async (req, res) => {
     find.title = objectSearch.regex;
   }
 
-  const products = await Product.find(find);
+  // Pagination
+  let objectPagination = {
+    currentPage: 1,
+    limitItem: 4,
+  };
+  if (req.query.page) {
+    objectPagination.currentPage = parseInt(req.query.page);
+  }
+  objectPagination.skip =
+    (objectPagination.currentPage - 1) * objectPagination.limitItem;
+  const countProduct = await Product.countDocuments(find);
+  const totalPage = countProduct / objectPagination.limitItem;
+  objectPagination.totalPage = Math.ceil(totalPage);
+  // End Pagination
+
+  const products = await Product.find(find)
+    .limit(objectPagination.limitItem)
+    .skip(objectPagination.skip);
 
   res.render("admin/pages/products/index", {
     pageTitle: "Trang sản phẩm",
     products: products,
     filterStatus: filterStatus,
     keyword: objectSearch.keyword,
+    pagination: objectPagination,
   });
 };
