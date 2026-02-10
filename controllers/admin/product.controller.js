@@ -2,6 +2,10 @@ const Product = require("../../models/product.model");
 
 // [GET] /admin/products
 module.exports.product = async (req, res) => {
+  let find = {
+    deleted: false,
+  };
+
   let filterStatus = [
     {
       name: "Tất cả",
@@ -19,6 +23,7 @@ module.exports.product = async (req, res) => {
       class: "",
     },
   ];
+
   if (req.query.status) {
     const index = filterStatus.findIndex(
       (item) => item.status == req.query.status,
@@ -28,18 +33,24 @@ module.exports.product = async (req, res) => {
     const index = filterStatus.findIndex((item) => item.status == "");
     filterStatus[index].class = "active";
   }
-  let find = {
-    deleted: false,
-  };
 
   if (req.query.status) {
     find.status = req.query.status;
   }
+
+  let keyword = "";
+  if (req.query.keyword) {
+    keyword = req.query.keyword;
+    const regex = new RegExp(keyword, "i");
+    find.title = regex;
+  }
+
   const products = await Product.find(find);
 
   res.render("admin/pages/products/index", {
     pageTitle: "Trang sản phẩm",
     products: products,
     filterStatus: filterStatus,
+    keyword: keyword,
   });
 };
