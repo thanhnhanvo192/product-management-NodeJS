@@ -61,3 +61,14 @@ module.exports.changeStatus = async (req, res) => {
   const backUrl = req.get("Referrer");
   res.redirect(backUrl);
 };
+
+// [PATCH] /admin/products/change-multi
+module.exports.changeMulti = async (req, res) => {
+  const newStatus = req.body.status;
+  const ids = req.body.ids.split(", ");
+
+  await Product.updateMany({ _id: { $in: ids } }, { status: newStatus });
+
+  const backUrl = req.get("Referrer");
+  res.redirect(backUrl);
+};
