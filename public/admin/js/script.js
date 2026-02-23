@@ -53,12 +53,12 @@ if (buttonPagination.length > 0) {
 // Checkbox multi
 const checkboxMulti = document.querySelector("[checkbox-multi]");
 if (checkboxMulti) {
-  console.log(checkboxMulti);
+  // console.log(checkboxMulti);
   const inputCheckAll = document.querySelector("input[name='checkall']");
   const inputsId = document.querySelectorAll("input[name='id']");
 
   inputCheckAll.addEventListener("click", () => {
-    console.log(inputCheckAll.checked);
+    // console.log(inputCheckAll.checked);
     if (inputCheckAll.checked) {
       inputsId.forEach((input) => {
         input.checked = true;
@@ -103,8 +103,20 @@ if (formChangeMulti) {
     }
 
     if (checkboxes.length > 0) {
-      const ids = Array.from(checkboxes).map((checkbox) => checkbox.value);
+      let ids = [];
       const inputIds = formChangeMulti.querySelector("input[name='ids']");
+      checkboxes.forEach((checkbox) => {
+        const id = checkbox.value;
+        if (status == "change-position") {
+          const position = checkbox
+            .closest("tr")
+            .querySelector("input[name='position']").value;
+          ids.push(`${id}-${position}`);
+        } else {
+          ids.push(id);
+        }
+      });
+
       inputIds.value = ids.join(", ");
       formChangeMulti.submit();
     } else {
