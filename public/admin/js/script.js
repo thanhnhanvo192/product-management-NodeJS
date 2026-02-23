@@ -125,3 +125,19 @@ if (formChangeMulti) {
   });
 }
 // End Form change multi
+
+// Show alert
+const alertShow = document.querySelector("[show-alert]");
+if (alertShow) {
+  const alertTime = alertShow.getAttribute("alert-time");
+  const closeAlert = alertShow.querySelector("[close-alert]");
+
+  setTimeout(() => {
+    alertShow.classList.add("alert-hidden");
+  }, alertTime);
+
+  closeAlert.addEventListener("click", () => {
+    alertShow.classList.add("alert-hidden");
+  });
+}
+// End Show alert
