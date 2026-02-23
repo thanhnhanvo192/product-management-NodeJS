@@ -90,8 +90,18 @@ const formChangeMulti = document.querySelector("[form-change-multi]");
 if (formChangeMulti) {
   formChangeMulti.addEventListener("submit", (e) => {
     e.preventDefault();
-
     const checkboxes = document.querySelectorAll("input[name='id']:checked");
+
+    const status = e.target.elements.status.value;
+    if (status == "delete-all") {
+      const isConfirm = confirm(
+        "Bạn có chắc muốn xoá những sản phẩm này không?",
+      );
+      if (!isConfirm) {
+        return;
+      }
+    }
+
     if (checkboxes.length > 0) {
       const ids = Array.from(checkboxes).map((checkbox) => checkbox.value);
       const inputIds = formChangeMulti.querySelector("input[name='ids']");

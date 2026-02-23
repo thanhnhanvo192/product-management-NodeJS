@@ -67,7 +67,20 @@ module.exports.changeMulti = async (req, res) => {
   const newStatus = req.body.status;
   const ids = req.body.ids.split(", ");
 
-  await Product.updateMany({ _id: { $in: ids } }, { status: newStatus });
+  switch (newStatus) {
+    case "active":
+      await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
+      break;
+    case "inactive":
+      await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" });
+      break;
+    case "delete-all":
+      await Product.updateMany(
+        { _id: { $in: ids } },
+        { deleted: true, deletedAt: new Date() },
+      );
+      break;
+  }
 
   const backUrl = req.get("Referrer");
   res.redirect(backUrl);
