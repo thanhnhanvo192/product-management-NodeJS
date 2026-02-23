@@ -90,6 +90,7 @@ module.exports.changeMulti = async (req, res) => {
         { _id: { $in: ids } },
         { deleted: true, deletedAt: new Date() },
       );
+      req.flash("success", `Đã xoá ${ids.length} sản phẩm`);
       break;
     case "change-position":
       for (item of ids) {
@@ -97,6 +98,7 @@ module.exports.changeMulti = async (req, res) => {
         position = parseInt(position);
         await Product.updateOne({ _id: id }, { position: position });
       }
+      req.flash("success", `Đã cập nhật vị trí của ${ids.length} sản phẩm`);
       break;
   }
 
@@ -112,6 +114,7 @@ module.exports.deleteProduct = async (req, res) => {
     { _id: id },
     { deleted: true, deletedAt: new Date() },
   ); // Xoá mềm
+  req.flash("success", `Đã xoá sản phẩm`);
 
   const backUrl = req.get("Referrer");
   res.redirect(backUrl);
