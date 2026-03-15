@@ -77,3 +77,18 @@
   cursor: pointer;
 }
 /* End Show alert */
+
+/* Image preview */
+.image-preview {
+  width: 150px;
+  height: auto;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.image-preview[src=""] {
+  display: none;
+}
+/* End Image preview */

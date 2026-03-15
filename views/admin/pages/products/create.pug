@@ -59,7 +59,7 @@ block main
         min="0"
         required
       )
-    div(class="form-group")
+    div(class="form-group" upload-image)
       label(for="thumbnail") Ảnh
       input(
         type="file"
@@ -67,6 +67,11 @@ block main
         id="thumbnail"
         name="thumbnail"
         accept="image/*"
+        upload-image-input
+      )
+      img(
+        src=""
+        upload-image-preview
       )
     div(class="form-group")
       label(for="position") Vị trí
