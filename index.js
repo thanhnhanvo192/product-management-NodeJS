@@ -11,7 +11,6 @@ const routes = require("./routes/clients/index.route"); // Import các route cho
 const systemConfig = require("./configs/system");
 
 const database = require("./configs/database");
-const system = require("./configs/system");
 database.connect();
 
 const app = express(); // Tạo ứng dụng Express
@@ -38,6 +37,8 @@ routes(app);
 app.use(express.static(`${__dirname}/public`)); // Thiết lập thư mục chứa file tĩnh
 
 // Start server
-app.listen(port, () => {
-  console.log(`App is listening on ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`App is listening on ${port}`);
+// });
+
+module.exports = app;
