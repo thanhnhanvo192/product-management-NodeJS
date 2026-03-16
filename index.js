@@ -25,7 +25,7 @@ app.use(flash());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded());
 
-app.set("views", "./views"); // Khai báo thư mục chứa các file giao diện
+app.set("views", `${__dirname}/views`); // Khai báo thư mục chứa các file giao diện
 app.set("view engine", "pug"); // Thiết lập Pug làm template engine
 
 // App local variables
@@ -35,7 +35,7 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin;
 routesAdmin(app);
 routes(app);
 
-app.use(express.static("public")); // Thiết lập thư mục chứa file tĩnh
+app.use(express.static(`${__dirname}/public`)); // Thiết lập thư mục chứa file tĩnh
 
 // Start server
 app.listen(port, () => {
