@@ -181,7 +181,23 @@ module.exports.editPatch = async (req, res) => {
     req.flash("success", "Cập nhật sản phẩm thành công");
   } catch (error) {
     console.log(error);
+    req.flash("error", "Cập nhật sản phẩm thất bại");
   }
 
   res.redirect(`${systemConfig.prefixAdmin}/products/edit/${req.params.id}`);
+};
+
+// [GET] /admin/products/detail/:id
+module.exports.detail = async (req, res) => {
+  const id = req.params.id;
+  const find = {
+    _id: id,
+    deleted: false,
+  };
+
+  const product = await Product.findOne(find);
+  res.render("admin/pages/products/detail", {
+    pageTitle: "Chi tiết sản phẩm",
+    product: product,
+  });
 };
